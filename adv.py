@@ -40,6 +40,17 @@ def get_opposite_direction(direction):
     elif direction == 'e':
         return 'w'
 
+# Generates a traversal path to explore all rooms
+def generate_traversal_path(graph):
+    # Container for generated path
+    generated_path = []
+    # Container used for backtracking
+    backtrack = []
+    # Used to keep track of which rooms have been visited
+    visited = {}
+    # Used to keep track of which rooms have unexplored paths
+    unexplored = {}
+
 
 
 # TRAVERSAL TEST
