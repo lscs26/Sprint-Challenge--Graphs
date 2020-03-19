@@ -29,6 +29,17 @@ player = Player(world.starting_room)
 # traversal_path = ['n', 'n']
 traversal_path = []
 
+# Returns the opposite direction (i.e. 'n' -> 's')
+def get_opposite_direction(direction):
+    if direction == 'n':
+        return 's'
+    elif direction == 's':
+        return 'n'
+    elif direction == 'w':
+        return 'e'
+    elif direction == 'e':
+        return 'w'
+
 
 
 # TRAVERSAL TEST
