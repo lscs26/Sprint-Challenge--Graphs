@@ -68,6 +68,28 @@ def generate_traversal_path(graph):
             visited[player.current_room.id] = player.current_room.get_exits()
             unexplored[player.current_room.id] = player.current_room.get_exits()
 
+        # If there aren't anymore directions to go in the current room, then backtrack
+        while len(unexplored[player.current_room.id]) < 1:
+            opposite_direction = backtrack.pop()
+            generated_path.append(opposite_direction)
+            player.travel(opposite_direction)
+
+        # Grab a direction to move in
+        move = unexplored[player.current_room.id].pop()
+        # Add it to the path
+        generated_path.append(move)
+        # Add the opposite of the move to the backtrack list
+        # (used to help backtrack when there aren't any new rooms to check in the current room)
+        backtrack.append(get_opposite_direction(move))
+        # Moves the player to the room to update the current room
+        player.travel(move)
+
+    # Returns a list of directions
+    return generated_path
+
+
+# Update traversal_path
+traversal_path.extend(generate_traversal_path(room_graph))
 
 
 # TRAVERSAL TEST
@@ -90,12 +112,12 @@ else:
 #######
 # UNCOMMENT TO WALK AROUND
 #######
-player.current_room.print_room_description(player)
-while True:
-    cmds = input("-> ").lower().split(" ")
-    if cmds[0] in ["n", "s", "e", "w"]:
-        player.travel(cmds[0], True)
-    elif cmds[0] == "q":
-        break
-    else:
-        print("I did not understand that command.")
+# player.current_room.print_room_description(player)
+# while True:
+#     cmds = input("-> ").lower().split(" ")
+#     if cmds[0] in ["n", "s", "e", "w"]:
+#         player.travel(cmds[0], True)
+#     elif cmds[0] == "q":
+#         break
+#     else:
+#         print("I did not understand that command.")
