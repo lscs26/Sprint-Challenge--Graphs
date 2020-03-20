@@ -44,12 +44,29 @@ def get_opposite_direction(direction):
 def generate_traversal_path(graph):
     # Container for generated path
     generated_path = []
-    # Container used for backtracking
+    # Container to backtrack
     backtrack = []
-    # Used to keep track of which rooms have been visited
+    # Keep track of which rooms have been visited
     visited = {}
-    # Used to keep track of which rooms have unexplored paths
+    # Keep track of which rooms have unexplored paths
     unexplored = {}
+
+    # Run while there are unexplored rooms
+    while len(visited) < len(room_graph):
+        # Add the starting point to visited and unexplored
+        if len(visited) == 0:
+            current_room = player.current_room.id
+            current_exits = player.current_room.get_exits()
+            # room: {0: ['n', 's', 'w', 'e']}
+            visited[current_room] = current_exits
+            # unexplored: {0: ['n', 's', 'w', 'e']}
+            unexplored[current_room] = current_exits
+
+        # Check to see if the current room has been visited
+        if player.current_room.id not in visited:
+            # Add current room to unexplored and visited
+            visited[player.current_room.id] = player.current_room.get_exits()
+            unexplored[player.current_room.id] = player.current_room.get_exits()
 
 
 
